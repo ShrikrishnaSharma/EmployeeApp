@@ -25,6 +25,7 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
        
         text: "EMPLOYEE_NAME",
         dataIndex: 'name',
+        id:'employeeName',
         width: 150,
        
         sortable: false
@@ -104,10 +105,33 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         dataIndex: 'endDate',
         sortable: false
     },
+
+        {
+            text:"Profile Completion",
+            id:"profileCompletionColumn",
+           dataIndex:'profileCompletion',
+           sortable:false
+            
+           /* renderer: function(val, meta, rec, rowIdx, colIdx, store, view) {
+                var column = view.getHeaderAtIndex(0);
+                var dataIndex = column.dataIndex;
+            }*/
+    		
+        },
+        {
+            xtype: 'checkcolumn',
+            header: 'Delete',
+            dataIndex: 'active',
+            width: 60,
+            editor: {
+                xtype: 'checkbox',
+                cls: 'x-grid-checkheader-editor'
+            }
+        }
     
  ],
     
- bbar: [{xtype:'paging'}],
+ bbar: [{xtype:'paging'}]
    
 });
 

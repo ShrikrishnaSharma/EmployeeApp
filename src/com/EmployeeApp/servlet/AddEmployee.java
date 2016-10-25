@@ -59,7 +59,9 @@ public class AddEmployee extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 	{
 
-	    try( PrintWriter out = response.getWriter()) {
+	    try {
+	    	
+	    	PrintWriter out = response.getWriter();
 
 
 	        name=request.getParameter("name");

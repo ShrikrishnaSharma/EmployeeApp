@@ -20,7 +20,7 @@ public class DepartmentDAO {
 	
 	public List<Department> getDepartmentList()
 	{
-		List<Department> departmentList= new ArrayList<>();
+		List<Department> departmentList= new ArrayList<Department>();
 		
 		
 		try

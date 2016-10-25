@@ -34,7 +34,7 @@ Ext.define('EmployeeApp.view.AddEmployeeForm', {
     
     name: 'employeeId',
     id:'employeeId',
-   hidden:true,
+   hidden:true
    
 },
             

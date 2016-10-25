@@ -80,7 +80,7 @@ public class EmployeeDAO {
 
 		System.out.println(employeeTypeId);
 		
-		List<EmployeeVO> employees=new ArrayList<>();
+		List<EmployeeVO> employees=new ArrayList<EmployeeVO>();
 		
 		boolean isFound=false;
 		
@@ -203,7 +203,7 @@ public class EmployeeDAO {
 	
 	public List<EmployeeType> getListTypes()
 	{
-		List<EmployeeType> listTypes=new ArrayList<>();
+		List<EmployeeType> listTypes=new ArrayList<EmployeeType>();
 		
 		try{
 			

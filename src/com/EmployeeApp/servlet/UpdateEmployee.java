@@ -40,8 +40,9 @@ public class UpdateEmployee extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try(PrintWriter out= response.getWriter())
+		try
 		{
+			PrintWriter out= response.getWriter();
 			id= Integer.parseInt(request.getParameter("id"));
 			name= request.getParameter("name");
 			startDate=formatter.parse(request.getParameter("startDate"));

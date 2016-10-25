@@ -7,7 +7,7 @@ import com.EmployeeApp.model.EmployeeType;
 
 public class ExtTypeResult {
 	
-	private List<EmployeeType> employeeListTypes=new ArrayList<>();
+	private List<EmployeeType> employeeListTypes=new ArrayList<EmployeeType>();
 	
 	public ExtTypeResult(List<EmployeeType> employeeListTypes)
 	{

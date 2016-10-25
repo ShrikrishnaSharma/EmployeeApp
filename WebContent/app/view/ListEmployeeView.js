@@ -1,3 +1,6 @@
+
+
+
 Ext.define('EmployeeApp.view.ListEmployeeView',
 {
 id:'displayViewGridPanel',
@@ -7,7 +10,11 @@ autoHeight: false,
 border: false,
 title: 'Employee Data',
 
-
+/*plugins: [
+          Ext.create('Ext.grid.plugin.RowEditing', {
+              clicksToEdit: 1
+          })
+      ],*/
 
 margins: '5 5 0 0',
 items: [

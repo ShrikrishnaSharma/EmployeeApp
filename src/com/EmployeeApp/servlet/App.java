@@ -12,10 +12,10 @@ public class App {
 
 		Properties prop = new Properties();
 		InputStream input = null;
-        HashMap<String, String> hm= new HashMap<>();
+        HashMap<String, String> hm= new HashMap<String,String>();
 		try {
 
-			input = new FileInputStream("C://EmployeeApp//EmployeeApp2//src//resources.properties");
+			input = new FileInputStream("C://EmployeeApp2//src//resources.properties");
 			System.out.printf("--------------------------"+"\n"+input);
 
 			// load a properties file

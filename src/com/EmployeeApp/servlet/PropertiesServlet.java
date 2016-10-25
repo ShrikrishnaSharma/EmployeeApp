@@ -30,7 +30,7 @@ public class PropertiesServlet extends HttpServlet {
 		
 		response.setContentType("application/json");
 		PrintWriter pw= response.getWriter();
-		HashMap<String,String> hm= new HashMap<>();
+		HashMap<String,String> hm= new HashMap<String,String>();
 	    hm= App.getMap();	
 	    System.out.println(hm);
 		Gson gson= new Gson();
