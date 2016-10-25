@@ -1,3 +1,5 @@
+
+
 Ext.define('EmployeeApp.view.EmployeeGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.displayViewGrid',
@@ -18,7 +20,7 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         text:'EMPLOYEE_ID',
         dataIndex: 'id',
         flex: 1,
-        
+        hidden:false,
         sortable: false
     },
     {
@@ -27,13 +29,30 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         dataIndex: 'name',
         id:'employeeName',
         width: 150,
+        editor: {
+            xtype:'textfield',
+            allowBlank:false
+        },
        
         sortable: false
     },
+    /*{
+        xtype: 'typeComboBox2', 
+        padding:20,// default for Toolbars
+        id:'employeeTypeId',
+        renderer:function()
+        {
+        	Ext.getCmp('typeComboBox2').setValue()
+        }
+    }*/
     {
         text: "EMPLOYEE_TYPE",
         dataIndex: 'type',
         width: 50,
+        editor: {
+            xtype:'typeComboBox2',
+            allowBlank:false
+        },
         sortable: false
     }/*,
     {
@@ -58,6 +77,10 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         text: "SALARY",
         dataIndex: 'salary',
         width: 100,
+        editor: {
+            xtype:'textfield'
+           // allowBlank:false
+        },
         sortable: false
     },
     {
@@ -66,6 +89,10 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         dataIndex: 'address',
         width: 150,
         //renderer: renderFirst,
+        editor: {
+            xtype:'textfield'
+           // allowBlank:false
+        },
         sortable: false
     },
     {
@@ -73,6 +100,10 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         text: "CITY",
         dataIndex: 'city',
         width: 100,
+        editor: {
+            xtype:'textfield'
+           // allowBlank:false
+        },
         sortable: false
     },
     {
@@ -81,6 +112,10 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         dataIndex: 'state',
         width: 150,
         //renderer: renderFirst,
+        editor: {
+            xtype:'textfield'
+           // allowBlank:false
+        },
         sortable: false
     },
     {
@@ -88,6 +123,10 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         text: "COUNTRY",
         dataIndex: 'country',
         width: 50,
+        editor: {
+            xtype:'textfield'
+            //allowBlank:false
+        },
         sortable: false
     },
     
@@ -97,17 +136,29 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         dataIndex: 'startDate',
         width: 50,
         //renderer: renderFirst,
+        editor: {
+            xtype:'datefield',
+            	
+            allowBlank:true
+        },
         sortable: false
     },
     {
        
         text: "END_DATE",
         dataIndex: 'endDate',
+        editor: {
+            xtype:'datefield',
+           
+            	
+           
+            allowBlank:true
+        },
         sortable: false
     },
 
         {
-            text:"Profile Completion",
+            text:"Profile Completion %",
             id:"profileCompletionColumn",
            dataIndex:'profileCompletion',
            sortable:false
@@ -130,8 +181,56 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
         }
     
  ],
+ selType: 'rowmodel',
+ plugins: [
+     Ext.create('Ext.grid.plugin.RowEditing', {
+         clicksToEdit: 1
+     })
+ ],
+ 
+ listeners: {
+	 
+	 'edit':function(editor,e)
+	 {
+		// execute an XHR to send/commit data to the server, in callback do (if successful):
+			console.log('edit it ');
+			
+			/* var row = Ext.getCmp('display-view').getSelectionModel().getSelection()[0];
+			 console.log(row.get('EMPLOYEE_NAME'));*/
+		
+			
+			var name=e.newValues.name;
+			var startDate=e.newValues.startDate;
+			if(startDate==undefined || startDate=="" || startDate==null)startDate=e.originalValues.startDate;
+			startDate=new Date(startDate);
+			console.log('startDate' +startDate);
+			var endDate=e.newValues.endDate;
+			
+			if(endDate==undefined || endDate=="" || endDate==null)endDate=e.originalValues.endDate;
+			endDate=new Date(endDate);
+			console.log('endDate'+endDate);
+			var description=e.newValues.description;
+			var salary=e.newValues.salary;
+			var address=e.newValues.address;
+			var city=e.newValues.city;
+			var state=e.newValues.state;
+			var country=e.newValues.country;
+			var type=e.newValues.type;
+			console.log(type);
+			var id=e.originalValues.id;
+			console.log(e);
+			
+			EmployeeApp.app.getController('EmployeeController').inlineUpdateEmployee(name,startDate,endDate,description,salary,address,city,state,country,type,id);
+		   
+	 }
+
+ },
     
  bbar: [{xtype:'paging'}]
    
 });
+
+
+
+
 

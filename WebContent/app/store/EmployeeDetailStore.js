@@ -3,7 +3,8 @@ Ext.define('EmployeeApp.store.EmployeeDetailStore',{
 	model:'EmployeeApp.model.EmployeeVOModel',
 	remoteGroup: true,
 	pageSize: 10,
-	//storeId:'employeeDetailStore',
+
+	storeId:'employeeDetailStore',
 	
 	proxy: {
         // load using script tags for cross domain, if the data in on the same domain as

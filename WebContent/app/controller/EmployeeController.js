@@ -92,6 +92,64 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
        
        
    },
+   inlineUpdateEmployee:function(name,startDate,endDate,description,salary,address,city,state,country,type,id)
+   {
+	  
+       
+       
+      
+       	Ext.Ajax.request({
+       		url:'http://localhost:8080/EmployeeApp2/UpdateEmployee',
+       		method:'post',
+       		//jsonData: departmentList,
+       		params:{
+       			
+       		    id: id,
+       			name: name,
+       			startDate:startDate,
+       			endDate:endDate,
+       			salary:salary,
+       			address:address,
+       			city:city,
+       			state:state,
+       			description:description,
+       			country:country,
+   
+       			type:type
+       			
+       			/*callback : function(options, success, response){ 
+       				console.log('alert');
+       				addEmployeeResponseJson = Ext.JSON.decode(response.responseText);
+       				console.log(addEmployeeResponseJson);*/
+              
+       		},
+        success: function(response) {
+        	
+    	    // resp is the XmlHttpRequest object
+    	    var options = Ext.decode(response.responseText);
+    	    //console.log(options["success"]);
+    	    //console.log(globalProperties.saveEmployeeMessage);
+    	    if(options.success==="true")
+    	    {
+    	    	Ext.Msg.alert('Notification',options.message);
+    	    	
+    	    	Ext.getCmp('display-view').getStore().load();
+    	    	
+    	    	
+    	    	
+    	    	
+    	    	 //Ext.getCmp('addEmployeeFormParentPanel').hide();
+    	    	//Ext.getCmp('displayViewGridPanel').show();
+    	    }
+    	    else
+    	    	{
+    	    	Ext.Msg.alert("unable to update inline");
+    	    	}
+    	    
+  	  }   
+       	});
+   },
+   
    updateEmployee: function()
    {   
 	   var id= Ext.getCmp("employeeId").getValue();

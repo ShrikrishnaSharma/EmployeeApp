@@ -35,6 +35,7 @@ public class UpdateEmployee extends HttpServlet {
    private String state;
    private String country;
    private String d;
+   int type=-1;
    private SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
    int status=0;
 	
@@ -42,19 +43,47 @@ public class UpdateEmployee extends HttpServlet {
 		
 		try
 		{
+			System.out.println("in update Employee-----------");
 			PrintWriter out= response.getWriter();
+			EmployeeDAO employeeDAO=new EmployeeDAO();
+			
 			id= Integer.parseInt(request.getParameter("id"));
+			
 			name= request.getParameter("name");
+			System.out.println("in update Employee34-----------");
+			System.out.println(request.getParameter("startDate"));
 			startDate=formatter.parse(request.getParameter("startDate"));
+			System.out.println(startDate);
+			System.out.println("in update Employee 46-----------");
 			endDate= formatter.parse(request.getParameter("endDate"));
 			description=request.getParameter("description");
+			System.out.println("in update Employee2-----------");
 	        salary=Double.parseDouble(request.getParameter("salary"));
 	        address=request.getParameter("address");
 	        city=request.getParameter("city");
 	        state=request.getParameter("state");
 	        country=request.getParameter("country");
 	        d= request.getParameter("departmentList");
+	        if(request.getParameter("type")!=null || request.getParameter("type")!="")
+	        {
+	        	type=Integer.parseInt(request.getParameter("type"));
+	        	
+	        }
+	        System.out.println("in update Employee3-----------");
 	         System.out.println(d);
+	         
+	         
+	 		 
+	          
+	       
+	        Employee employee=new Employee(name,description,address,city,state,country,salary, startDate, endDate);
+
+	        
+
+	       int status=employeeDAO.updateEmployee(employee, id,type);
+	      // int id=employeeDAO.getCurrentEmployeeId(name);
+	       if(d!=null && d!="")
+	         {
 	         ArrayList<String> aList= new ArrayList(Arrays.asList(d.split(",")));
 	         
 	         ArrayList<Integer> departmentId=new ArrayList<Integer>();
@@ -67,22 +96,17 @@ public class UpdateEmployee extends HttpServlet {
 	         }
 	         System.out.println(aList.toString());
 	         
-	 		 
-	          
-	       
-	        Employee employee=new Employee(name,description,address,city,state,country,salary, startDate, endDate);
-
-	        EmployeeDAO employeeDAO=new EmployeeDAO();
-
-	       int status=employeeDAO.updateEmployee(employee, id);
-	      // int id=employeeDAO.getCurrentEmployeeId(name);
+	     
 	       
 	       DepartmentDAO departmentDAO = new DepartmentDAO();
 	       departmentDAO.updateEmployeeDepartmentDetail(departmentId,id);
+	       }
+	       
+	       
 	       
 	       
 	       //response.setContentType("application/json");
-	       
+	       System.out.println("----------------update status"+status);
 	       
 	      if(status!=0)
 	      {

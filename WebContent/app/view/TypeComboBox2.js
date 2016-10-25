@@ -10,5 +10,5 @@ Ext.define('EmployeeApp.view.TypeComboBox2', {
     store: states,
     queryMode: 'local',
     displayField: 'typeName',
-    valueField: 'id',
+    valueField: 'id'
   });

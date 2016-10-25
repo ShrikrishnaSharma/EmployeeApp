@@ -22,6 +22,7 @@ public class EmployeeDAO {
 	}
 	
 	
+	
 	public int addEmployee(Employee employee)
 	{
 	      
@@ -251,7 +252,7 @@ public class EmployeeDAO {
 		}
 	}
  
-    public int updateEmployee(Employee employee, int id)
+    public int updateEmployee(Employee employee, int id,int type)
    { 
     	int status=0;
 	 try
@@ -268,6 +269,15 @@ public class EmployeeDAO {
 			ps.setString(9,employee.getCountry());
 			ps.setInt(10, id);
 		  status=ps.executeUpdate();
+		  
+		  if(type!=-1)
+		  {
+			   ps= connection.prepareStatement("update employee_type_detail set type_id=? where employee_id=? ") ;
+			   ps.setInt(1, type);
+			   ps.setInt(2,id);
+			   ps.executeUpdate();
+			  
+		  }
 	 }
 	 catch(Exception e)
 	 {

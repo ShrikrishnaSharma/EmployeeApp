@@ -113,7 +113,7 @@ items: [{
     	        	//Ext.getCmp('employeeType').reset();
     	        	Ext.getCmp('addEmployeeFormParentPanel').hide();
     	       	    Ext.getCmp('displayViewGridPanel').show();
-    	       	    Ext.getCmp('display-view').getStore.reload();
+    	       	    //Ext.getCmp('employeeDetailStore').getStore.reload();
     	        }
     	        else if(btnText === "yes"){
     	            Ext.Msg.alert("Alert", "You have confirmed 'Yes'.");

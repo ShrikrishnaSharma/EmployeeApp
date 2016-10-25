@@ -3,8 +3,11 @@ Ext.define('EmployeeApp.model.EmployeeVOModel', {
 	
 
 	 fields: [
-	            'name','address','city','state','country','salary','startDate','endDate','type',
+	            'name','address','city','state','country','salary',
 	            {name: 'id', type: 'int'},
+	            {name:'startDate',type:'date'},
+	            {name:'endDate',type:'date'},
+	            {name:'type',type:'String'},
 	            {
 	                name: 'profileCompletion' ,
 	                type:'int',
@@ -12,7 +15,7 @@ Ext.define('EmployeeApp.model.EmployeeVOModel', {
 	            	   
 	            	   var data=record.getData();
 	            	   
-	            	   console.log(data.name+','+data.address+','+data.city+','+data.state+','+data.country+','+data.salary+','+data.startDate+','+data.endDate+','+data.type);
+	            	   //console.log(data.name+','+data.address+','+data.city+','+data.state+','+data.country+','+data.salary+','+data.startDate+','+data.endDate+','+data.type);
 	            	   
 	            	   var profileCompletion=0;
 	            	   	
@@ -53,7 +56,7 @@ Ext.define('EmployeeApp.model.EmployeeVOModel', {
             		   profileCompletion=profileCompletion+5;
             		   }
 	            	   
-	            	   console.log('profile completion is '+profileCompletion);
+	            	  // console.log('profile completion is '+profileCompletion);
 	            	   return profileCompletion; 
 	               }
 	                     
