@@ -22,6 +22,26 @@ public class EmployeeDAO {
 	}
 	
 	
+	public int deleteEmployeeById(int id)
+	{
+		int status=0;
+		try
+		{
+			PreparedStatement ps=connection.prepareStatement("delete from employee_type_detail where employee_id=?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			ps=connection.prepareStatement("delete from employee where id=?");
+			ps.setInt(1, id);
+			status=ps.executeUpdate();
+			
+		}catch(Exception e)
+		{
+			System.out.println("unable to delete employees");
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
 	
 	public int addEmployee(Employee employee)
 	{

@@ -12,6 +12,47 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 		
 	},
 	
+	
+	deleteSelectedEmployees:function(empIds)
+	{
+		console.log(empIds);
+		Ext.Ajax.request({
+       		url:'http://localhost:8080/EmployeeApp2/DeleteEmployee',
+       		method:'post',
+       		
+       		params:{
+       			empIds:empIds
+       			
+       			/*callback : function(options, success, response){ 
+       				console.log('alert');
+       				addEmployeeResponseJson = Ext.JSON.decode(response.responseText);
+       				console.log(addEmployeeResponseJson);*/
+              
+       		},
+        success: function(response) {
+        	
+    	    // resp is the XmlHttpRequest object
+    	    var options = Ext.decode(response.responseText);
+    	    //console.log(options["success"]);
+    	    //console.log(globalProperties.saveEmployeeMessage);
+    	    if(options.success==="true")
+    	    {
+    	    	Ext.Msg.alert('Notification','Employees Deleted Succesfully');
+    	    	
+    	    	Ext.getCmp('display-view').getStore().load();
+    	    	 //Ext.getCmp('addEmployeeFormParentPanel').hide();
+    	    	//Ext.getCmp('displayViewGridPanel').show();
+    	    }
+    	    else
+    	    	{
+    	    	Ext.Msg.alert("error","unable to delete");
+    	    	}
+    	    
+    	  }     
+       		
+       	});
+	},
+	
 	addEmployee: function(){
 		console.log("employee id value"+Ext.getCmp('employeeId').getValue());   
        var name= Ext.getCmp('name').getValue();

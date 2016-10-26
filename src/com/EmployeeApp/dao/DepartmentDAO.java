@@ -16,7 +16,20 @@ public class DepartmentDAO {
 		super();
 	}
 	
-	
+	public void deleteEmployeeDepartmentDetail(int id)
+	{
+		try
+		{
+			PreparedStatement ps=connection.prepareStatement("delete from employee_department_detail where employee_id=?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			
+		}catch(Exception e)
+		{
+			System.out.println("unable to delete from employee_department_detail");
+			e.printStackTrace();
+		}
+	}
 	
 	public List<Department> getDepartmentList()
 	{

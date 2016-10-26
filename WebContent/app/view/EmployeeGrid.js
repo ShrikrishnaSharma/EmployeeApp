@@ -177,8 +177,48 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
             editor: {
                 xtype: 'checkbox',
                 cls: 'x-grid-checkheader-editor'
+            },
+            listeners:{
+            	'checkchange':function(field, rowIndex, checked, eOpts){
+            		
+            		console.log('field'+field);
+            		console.log('row index '+rowIndex);
+            		console.log('checked '+checked);
+            		console.log('e Opts '+eOpts);
+            		
+            		if(checked===true)
+            			{
+            			rwIndex.push(rowIndex);
+            			}
+            		if(checked==false)
+            			{
+            			rwIndex.pop(rowIndex);
+            			}
+            		
+            		
+            		console.log(rwIndex);
+            		
+            	}
+            
+            	
+             // rwIndex.push(rowIndex);  
             }
         }
+       
+        /*{
+            xtype: 'actioncolumn',
+            width: 30,
+            sortable: false,
+            menuDisabled: true,
+            items: [{
+                
+                tooltip: 'Delete Employee',
+                scope: this,
+                handler: function(grid, rowIndex){
+                
+                }
+            }]
+        }*/
     
  ],
  selType: 'rowmodel',

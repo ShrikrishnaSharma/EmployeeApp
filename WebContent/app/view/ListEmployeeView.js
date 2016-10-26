@@ -56,6 +56,69 @@ items: [
 	        		 }
 	         
 	         },
+	         {
+	        	 xtype:'button',
+	        	 text: 'DELECT SELECTED EMPLOYEES',
+	        	 handler:function(grid,rowIndex)
+	        	 
+        		 {
+	        		 Ext.Msg.confirm('Confirmation','Do you want to delete selected employees',function(btnText){
+	        			 
+	        			 
+	        			 if(btnText==="yes")
+	        				 {
+	        				 
+	        				 
+	        			 
+	        		 
+	        		 var empIds="";
+	        		 var empId=[];
+	        		 
+	        		 var selection = Ext.getCmp('display-view').columns[11];
+	        		 
+	        		 var store=Ext.getCmp('display-view').getStore();
+
+	        		 var totalCount = Ext.getCmp('display-view').getStore().totalCount;
+	        		 var totalRowsToDelete=rwIndex.length;
+	        		 
+	        		 for(var i=0; i<totalRowsToDelete;i++)
+	        			 {
+	        			 var emp=Ext.getCmp('display-view').getStore().getAt(rwIndex[i]);
+	        			 empId.push(emp.get('id'));
+	        			 
+	        			 if(i==totalRowsToDelete-1)
+	        				 {
+	        				 empIds=empIds+emp.get('id');
+	        				 }
+	        			 else
+	        				 {
+	        				 empIds= emp.get('id')+","+empIds;
+	        				 }
+	        			 
+	        			 }
+	        		 
+	        		 /*for(var i=0;i<empId.length;i++)
+	      		   {
+	      		   empIds=empIds+empId[i];
+	      		   if(i<(empId.length-1))
+	      			   {
+	      			   empIds= empIds+",";
+	      			   }
+	      		   
+	      		   }*/
+	        		 console.log(empIds);
+	        			
+	        		 EmployeeApp.app.getController('EmployeeController').deleteSelectedEmployees(empIds);
+	        			
+	        			 
+	        		 
+	        		 
+        		 }
+	        		 
+	        		 } );
+	         }
+	         }
+	         
 	      
 ]
 },
