@@ -9,7 +9,7 @@ Ext.define('EmployeeApp.view.AddEmployeeFormPanel',
 	        title: 'EMPLOYEE',
 	        items:[{
 	        	
-	        	xtype:'addEmployeeForm',
+	        	xtype:'addEmployeeForm'
 	        
 	        	
 	        }]
@@ -20,7 +20,7 @@ Ext.define('EmployeeApp.view.AddEmployeeFormPanel',
 	        title: 'DEPARTMENT',
                       items:     [{
 	        	
-	        	          xtype:'addDepartmentForm',
+	        	          xtype:'addDepartmentForm'
 	        	             /*listeners: {
 	        	               click: 
 	        	            	   {

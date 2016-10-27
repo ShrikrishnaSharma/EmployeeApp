@@ -8,6 +8,7 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
 	viewConfig:{
 	    markDirty:false
 	},
+	multiSelect:true,
 	
 	
 	

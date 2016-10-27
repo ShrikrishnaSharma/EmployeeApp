@@ -107,17 +107,18 @@ items: [{
     	 //console.log("in cancel");
     	if(Ext.getCmp('addEmployeeForm').isDirty()==true || Ext.getCmp('addDepartmentSelectorForm').isDirty()==true)
     		{
-    		Ext.Msg.confirm('Confirm','Do you wanna save your changes',function(btnText){
-    	        if(btnText === "no"){
+    		Ext.Msg.confirm('Confirm','Do you wish to go to home screen',function(btnText){
+    	        if(btnText === "yes"){
     	        	Ext.getCmp('addEmployeeForm').getForm().reset();
     	        	Ext.getCmp('addDepartmentForm').getForm().reset();
     	        	//Ext.getCmp('employeeType').reset();
     	        	Ext.getCmp('addEmployeeFormParentPanel').hide();
+    	        	Ext.getCmp('display-view').getStore().reload();
     	       	    Ext.getCmp('displayViewGridPanel').show();
-    	       	    //Ext.getCmp('employeeDetailStore').getStore.reload();
+    	       	    
     	        }
-    	        else if(btnText === "yes"){
-    	            Ext.Msg.alert("Alert", "You have confirmed 'Yes'.");
+    	        else if(btnText === "no"){
+    	            
     	        }
     	    }, this);
     		}
