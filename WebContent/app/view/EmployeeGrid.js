@@ -5,6 +5,9 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
     alias: 'widget.displayViewGrid',
 	id: 'display-view',
 	store: 'EmployeeDetailStore',
+	viewConfig:{
+	    markDirty:false
+	},
 	
 	
 	
@@ -224,7 +227,8 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
  selType: 'rowmodel',
  plugins: [
      Ext.create('Ext.grid.plugin.RowEditing', {
-         clicksToEdit: 1
+         clicksToEdit: 2,
+         errorSummary:false
      })
  ],
  
@@ -238,29 +242,31 @@ Ext.define('EmployeeApp.view.EmployeeGrid', {
 			/* var row = Ext.getCmp('display-view').getSelectionModel().getSelection()[0];
 			 console.log(row.get('EMPLOYEE_NAME'));*/
 		
+			var employeeDataObject={};
+			 employeeDataObject.name=e.newValues.name;
+			employeeDataObject.startDate=e.newValues.startDate;
+			if(employeeDataObject.startDate==undefined || employeeDataObject.startDate=="" || employeeDataObject.startDate==null)employeeDataObject.startDate=e.originalValues.startDate;
+			employeeDataObject.startDate=new Date(employeeDataObject.startDate).getDate()+"/"+(new Date(employeeDataObject.startDate).getMonth()+1)+"/"+new Date(employeeDataObject.startDate).getFullYear();
+			console.log('startDate' +employeeDataObject.startDate);
+			 employeeDataObject.endDate=e.newValues.endDate;
 			
-			var name=e.newValues.name;
-			var startDate=e.newValues.startDate;
-			if(startDate==undefined || startDate=="" || startDate==null)startDate=e.originalValues.startDate;
-			startDate=new Date(startDate);
-			console.log('startDate' +startDate);
-			var endDate=e.newValues.endDate;
+			if(employeeDataObject.endDate==undefined || employeeDataObject.endDate=="" || employeeDataObject.endDate==null)employeeDataObject.endDate=e.originalValues.endDate;
+			employeeDataObject.endDate=new Date(employeeDataObject.endDate).getDate()+"/"+(new Date(employeeDataObject.endDate).getMonth()+1)+"/"+new Date(employeeDataObject.endDate).getFullYear();
+			console.log('endDate'+employeeDataObject.endDate);
+			employeeDataObject.description=e.newValues.description;
+			employeeDataObject.salary=e.newValues.salary;
+			employeeDataObject.address=e.newValues.address;
+			employeeDataObject.city=e.newValues.city;
+			employeeDataObject.state=e.newValues.state;
+			employeeDataObject.country=e.newValues.country;
+			employeeDataObject.type=e.newValues.type;
 			
-			if(endDate==undefined || endDate=="" || endDate==null)endDate=e.originalValues.endDate;
-			endDate=new Date(endDate);
-			console.log('endDate'+endDate);
-			var description=e.newValues.description;
-			var salary=e.newValues.salary;
-			var address=e.newValues.address;
-			var city=e.newValues.city;
-			var state=e.newValues.state;
-			var country=e.newValues.country;
-			var type=e.newValues.type;
-			console.log(type);
-			var id=e.originalValues.id;
-			console.log(e);
+			employeeDataObject.id=e.originalValues.id;
+			console.log(employeeDataObject);
 			
-			EmployeeApp.app.getController('EmployeeController').inlineUpdateEmployee(name,startDate,endDate,description,salary,address,city,state,country,type,id);
+			
+			
+			EmployeeApp.app.getController('EmployeeController').inlineUpdateEmployee(employeeDataObject);
 		   
 	 }
 

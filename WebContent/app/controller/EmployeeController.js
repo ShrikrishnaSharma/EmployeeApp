@@ -133,17 +133,34 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
        
        
    },
-   inlineUpdateEmployee:function(name,startDate,endDate,description,salary,address,city,state,country,type,id)
+   inlineUpdateEmployee:function(employeeDataObject)
    {
 	  
        
-       
+      /* var employeeDataJson="";
+       employeeDataJson=employeeDataJson+"{id:"+employeeDataObject.id+",";
+       employeeDataJson=employeeDataJson+"name:"+employeeDataObject.name+",";
+       employeeDataJson=employeeDataJson+"startDate:"+employeeDataObject.startDate+",";
+       employeeDataJson=employeeDataJson+"endDate:"+employeeDataObject.endDate+",";
+       employeeDataJson=employeeDataJson+"description:"+employeeDataObject.description+",";
+       employeeDataJson=employeeDataJson+"salary:"+employeeDataObject.salary+",";
+       employeeDataJson=employeeDataJson+"address:"+employeeDataObject.address+",";
+       employeeDataJson=employeeDataJson+"city:"+employeeDataObject.city+",";
+       employeeDataJson=employeeDataJson+"state:"+employeeDataObject.state+",";
+       employeeDataJson=employeeDataJson+"country:"+employeeDataObject.country+",";
+       employeeDataJson=employeeDataJson+"type:"+employeeDataObject.type;
+       employeeDataJson=employeeDataJson+"}";*/
       
+       employeeDataJsonObject=JSON.stringify(employeeDataObject);
+       console.log(employeeDataJsonObject);
        	Ext.Ajax.request({
        		url:'http://localhost:8080/EmployeeApp2/UpdateEmployee',
        		method:'post',
-       		//jsonData: departmentList,
-       		params:{
+       		headers: {
+       	        'employeeDataJsonObject': employeeDataJsonObject
+       	    },
+       		//jsonData: employeeDataJsonObject,
+       		/*params:{
        			
        		    id: id,
        			name: name,
@@ -158,12 +175,12 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
    
        			type:type
        			
-       			/*callback : function(options, success, response){ 
+       			callback : function(options, success, response){ 
        				console.log('alert');
        				addEmployeeResponseJson = Ext.JSON.decode(response.responseText);
-       				console.log(addEmployeeResponseJson);*/
+       				console.log(addEmployeeResponseJson);
               
-       		},
+       		},*/
         success: function(response) {
         	
     	    // resp is the XmlHttpRequest object
@@ -184,7 +201,7 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
     	    }
     	    else
     	    	{
-    	    	Ext.Msg.alert("unable to update inline");
+    	    	Ext.Msg.alert("error","unable to update inline");
     	    	}
     	    
   	  }   

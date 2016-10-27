@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.EmployeeApp.dao.DepartmentDAO;
 import com.EmployeeApp.dao.EmployeeDAO;
 import com.EmployeeApp.model.Employee;
+import com.EmployeeApp.model.EmployeeJson;
+import com.EmployeeApp.model.EmployeeVO;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class UpdateEmployee
@@ -47,17 +50,25 @@ public class UpdateEmployee extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			EmployeeDAO employeeDAO=new EmployeeDAO();
 			
-			id= Integer.parseInt(request.getParameter("id"));
+			String jsonString=request.getHeader("employeeDataJsonObject");
+			System.out.println(jsonString);
+			
+			Gson gson =new Gson();
+			
+			EmployeeJson employeeJson=gson.fromJson(jsonString,EmployeeJson.class);
+			
+			System.out.println(employeeJson);
+			System.out.println(employeeJson.getName());
+			
+			/*id= Integer.parseInt(request.getParameter("id"));
 			
 			name= request.getParameter("name");
-			System.out.println("in update Employee34-----------");
-			System.out.println(request.getParameter("startDate"));
+			
 			startDate=formatter.parse(request.getParameter("startDate"));
-			System.out.println(startDate);
-			System.out.println("in update Employee 46-----------");
+			
 			endDate= formatter.parse(request.getParameter("endDate"));
 			description=request.getParameter("description");
-			System.out.println("in update Employee2-----------");
+			
 	        salary=Double.parseDouble(request.getParameter("salary"));
 	        address=request.getParameter("address");
 	        city=request.getParameter("city");
@@ -69,9 +80,9 @@ public class UpdateEmployee extends HttpServlet {
 	        	type=Integer.parseInt(request.getParameter("type"));
 	        	
 	        }
-	        System.out.println("in update Employee3-----------");
-	         System.out.println(d);
+	       */
 	         
+			
 	         
 	 		 
 	          
@@ -80,9 +91,9 @@ public class UpdateEmployee extends HttpServlet {
 
 	        
 
-	       int status=employeeDAO.updateEmployee(employee, id,type);
+	       int status=employeeDAO.updateEmployee(employeeJson);
 	      // int id=employeeDAO.getCurrentEmployeeId(name);
-	       if(d!=null && d!="")
+	       /*if(d!=null && d!="")
 	         {
 	         ArrayList<String> aList= new ArrayList(Arrays.asList(d.split(",")));
 	         
@@ -100,7 +111,7 @@ public class UpdateEmployee extends HttpServlet {
 	       
 	       DepartmentDAO departmentDAO = new DepartmentDAO();
 	       departmentDAO.updateEmployeeDepartmentDetail(departmentId,id);
-	       }
+	       }*/
 	       
 	       
 	       
@@ -108,7 +119,7 @@ public class UpdateEmployee extends HttpServlet {
 	       //response.setContentType("application/json");
 	       System.out.println("----------------update status"+status);
 	       
-	      if(status!=0)
+	      if(status==0)
 	      {
 	        out.println("{");
 	        out.println("\"success\": \"true\",");

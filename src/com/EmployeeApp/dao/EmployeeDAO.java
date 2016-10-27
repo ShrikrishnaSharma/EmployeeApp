@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.EmployeeApp.model.Employee;
+import com.EmployeeApp.model.EmployeeJson;
 import com.EmployeeApp.model.EmployeeType;
 import com.EmployeeApp.model.EmployeeVO;
 
@@ -272,38 +275,53 @@ public class EmployeeDAO {
 		}
 	}
  
-    public int updateEmployee(Employee employee, int id,int type)
+    public int updateEmployee(EmployeeJson employeeJson)
    { 
-    	int status=0;
+    	
+    	DateFormat df=new SimpleDateFormat("MM/dd/YYYY");
+    	int type=-1;
+    	int count=-2;
+    	int status;
 	 try
 	 {
 		 PreparedStatement ps= connection.prepareStatement("update employee set name=?,start_date=?,end_date=?,description=?,salary=?,address=?,city=?,state=?,country=? where id=?");
-		    ps.setString(1, employee.getName());
-			ps.setDate(2, new java.sql.Date(employee.getStartDate().getTime()));
-			ps.setDate(3, new java.sql.Date(employee.getEndDate().getTime()));
-			ps.setString(4, employee.getDescription());
-			ps.setDouble(5, employee.getSalary());
-			ps.setString(6, employee.getAddress());
-			ps.setString(7,employee.getCity());
-			ps.setString(8, employee.getState());
-			ps.setString(9,employee.getCountry());
-			ps.setInt(10, id);
-		  status=ps.executeUpdate();
+		    ps.setString(1, employeeJson.getName());
+		    System.out.println("in dao2");
+		    System.out.println(df.parse(employeeJson.getStartDate()));
+			ps.setDate(2, new java.sql.Date(df.parse(employeeJson.getStartDate()).getTime()));
+			System.out.println("in dao3");
+			ps.setDate(3, new java.sql.Date(df.parse(employeeJson.getEndDate()).getTime()));
+			ps.setString(4, employeeJson.getDescription());
+			ps.setDouble(5, employeeJson.getSalary());
+			ps.setString(6, employeeJson.getAddress());
+			ps.setString(7,employeeJson.getCity());
+			ps.setString(8, employeeJson.getState());
+			ps.setString(9,employeeJson.getCountry());
+			ps.setInt(10, employeeJson.getId());
+		    status=ps.executeUpdate();
+		    System.out.println("in dao4");
+		    if(status!=0)count++;
 		  
-		  if(type!=-1)
-		  {
+		  	System.out.println("in update dao");
+			  if(employeeJson.getType().equals("PERMANENT"))type=1;
+			  if(employeeJson.getType().equals("CONTRACT"))type=2;
+			  if(employeeJson.getType().equals("INTERN"))type=3;
+			  if(type!=-1)
+			  {
 			   ps= connection.prepareStatement("update employee_type_detail set type_id=? where employee_id=? ") ;
 			   ps.setInt(1, type);
-			   ps.setInt(2,id);
-			   ps.executeUpdate();
-			  
-		  }
+			   ps.setInt(2,employeeJson.getId());
+			   status=ps.executeUpdate();
+			   if(status!=0)count++;
+			   System.out.println("in update dao 2");
+			  }
+		  
 	 }
 	 catch(Exception e)
 	 {
 		 
 	 }
-	 return status;
+	 return count;
     }
 	
 }
