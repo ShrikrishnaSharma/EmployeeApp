@@ -9,7 +9,7 @@ public class EmployeeJson {
 	double salary;
 	String startDate, endDate;
 	//List<String> departmentList=new ArrayList<>();
-	String type;
+	int type;
 	
 	
 	
@@ -20,7 +20,7 @@ public class EmployeeJson {
 
 
 	public EmployeeJson(int id, String name, String description, String address, String city, String state,
-			String country, double salary, String startDate, String endDate,  String type) {
+			String country, double salary, String startDate, String endDate,  int type) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -170,13 +170,13 @@ public class EmployeeJson {
 */
 
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
 
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

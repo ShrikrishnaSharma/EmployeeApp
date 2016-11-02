@@ -2,7 +2,7 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 	extend:'Ext.app.Controller',
 	stores:['EmployeeDetailStore','EmployeeTypeStore','DepartmentStore', 'AddEmployeeFormTypeComboBoxStore'],
 	models:['EmployeeVOModel','EmployeeTypeModel','DepartmentModel'],
-	views:['EmployeeGrid','ListEmployeeView','TypeComboBox', 'Paging','AddEmployeeForm','AddEmployeeFormPanel','AddDepartmentForm', 'Buttons','AddEmployeeFormParentPanel','TypeComboBox2'],
+	views:['EmployeeGrid','ListEmployeeView','TypeComboBox', 'Paging','AddEmployeeForm','AddEmployeeFormPanel','AddDepartmentForm', 'Buttons','AddEmployeeFormParentPanel','TypeComboBox2','LoginForm'],
 	refs:[
 	      
 	],
@@ -12,7 +12,43 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 		
 	},
 	
-	
+	loginEmployee:function()
+	{
+		var username=Ext.getCmp('username').getValue();
+		var password=Ext.getCmp('password').getValue();
+		Ext.Ajax.request({
+			
+			
+			url:'http://localhost:8080/EmployeeApp2/LoginServlet',
+			method:'post',
+			params:{
+				username:username,
+				password:password
+				},
+				success:function(response) {
+		        	
+		    	    // resp is the XmlHttpRequest object
+		    	    var options = Ext.decode(response.responseText);
+		    	    console.log(options.success);
+		    	    console.log(options.message);
+		    	    //console.log(options["success"]);
+		    	    //console.log(globalProperties.saveEmployeeMessage);
+		    	    if(options.success===true)
+		    	    {
+		    	    	Ext.Msg.alert('Notification',options.message);
+		    	    	
+		    	    	Ext.getCmp('display-view').getStore().load();
+		    	    	 Ext.getCmp('loginForm').hide();
+		    	    	Ext.getCmp('displayViewGridPanel').show();
+		    	    }
+		    	    else
+		    	    	{
+		    	    	Ext.Msg.alert("Error",options.message);
+		    	    	}
+		    	    
+		    	  }     
+		});
+	},
 	deleteSelectedEmployees:function(empIds)
 	{
 		console.log(empIds);

@@ -303,9 +303,7 @@ public class EmployeeDAO {
 		    if(status!=0)count++;
 		  
 		  	System.out.println("in update dao");
-			  if(employeeJson.getType().equals("PERMANENT"))type=1;
-			  if(employeeJson.getType().equals("CONTRACT"))type=2;
-			  if(employeeJson.getType().equals("INTERN"))type=3;
+			  type=employeeJson.getType();
 			  if(type!=-1)
 			  {
 			   ps= connection.prepareStatement("update employee_type_detail set type_id=? where employee_id=? ") ;

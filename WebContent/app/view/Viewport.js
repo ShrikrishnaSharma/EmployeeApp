@@ -4,10 +4,7 @@ Ext.define('EmployeeApp.view.Viewport',{
       
         Ext.apply(this, {
             //id: 'dashboard-viewport',
-            layout: {
-                type: 'fit',
-                //padding: '35 5 5 5' // pad the layout from the window edges
-            },
+        	
 			defaults: {
 		        //collapsible: true,
 		       // split: true
@@ -38,14 +35,18 @@ Ext.define('EmployeeApp.view.Viewport',{
 		        	         }
 		        ]
 		        },*/
+				{
+					xtype:'loginFormModule',
+					hidden:false
+				},
 		        {
 					xtype:'viewPanel',
-					
+					hidden:true
 	            },
 	            
 	            {
 	            	xtype:'addEmployeeFormParentPanel',
-	            	hidden:'true',
+	            	hidden:true
 	            	            	
 	            }
 					
