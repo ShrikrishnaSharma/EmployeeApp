@@ -2,7 +2,7 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 	extend:'Ext.app.Controller',
 	stores:['EmployeeDetailStore','EmployeeTypeStore','DepartmentStore', 'AddEmployeeFormTypeComboBoxStore'],
 	models:['EmployeeVOModel','EmployeeTypeModel','DepartmentModel'],
-	views:['EmployeeGrid','ListEmployeeView','TypeComboBox', 'Paging','AddEmployeeForm','AddEmployeeFormPanel','AddDepartmentForm', 'Buttons','AddEmployeeFormParentPanel','TypeComboBox2','LoginForm'],
+	views:['EmployeeGrid','ListEmployeeView','TypeComboBox', 'Paging','AddEmployeeForm','AddEmployeeFormPanel','AddDepartmentForm', 'Buttons','AddEmployeeFormParentPanel','TypeComboBox2','LoginForm','AuthenticationTypeComboBox'],
 	refs:[
 	      
 	],
@@ -12,10 +12,49 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 		
 	},
 	
+	
+	logout:function()
+	{
+Ext.Ajax.request({
+			
+			
+			url:'http://localhost:8080/EmployeeApp2/LogoutServlet',
+			method:'get',
+			
+				success:function(response) {
+		        	
+		    	    // resp is the XmlHttpRequest object
+		    	    var options = Ext.decode(response.responseText);
+		    	    console.log(options.success);
+		    	    console.log(options.message);
+		    	    //console.log(options["success"]);
+		    	    //console.log(globalProperties.saveEmployeeMessage);
+		    	    if(options.success===true)
+		    	    {
+		    	    	Ext.Msg.alert('Notification',options.message);
+		    	    	
+		    	    	Ext.getCmp('displayViewGridPanel').hide();
+		    	    	Ext.getCmp('loginForm').getForm().reset();
+		    	    	 Ext.getCmp('loginForm').show();
+		    	    	
+		    	    }
+		    	    else
+		    	    	{
+		    	    	Ext.Msg.alert("Error",options.message);
+		    	    	}
+		    	    
+		    	  }     
+		});
+	},
+	
+	
 	loginEmployee:function()
 	{
 		var username=Ext.getCmp('username').getValue();
 		var password=Ext.getCmp('password').getValue();
+		console.log(Ext.getCmp('authenticationType'));
+		var authenticationType=Ext.getCmp('authenticationType').getValue();
+		console.log(authenticationType);
 		Ext.Ajax.request({
 			
 			
@@ -23,7 +62,8 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 			method:'post',
 			params:{
 				username:username,
-				password:password
+				password:password,
+				authenticationType:authenticationType
 				},
 				success:function(response) {
 		        	

@@ -63,7 +63,7 @@ Ext.define('EmployeeApp.view.AddEmployeeForm', {
                 Ext.getCmp('endDate').setMinValue(field.getValue());
                 Ext.getCmp('endDate').setValue(field.getValue());
         	}
-        },
+        }
     },
     {
         xtype: 'datefield',

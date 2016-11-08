@@ -15,12 +15,28 @@ public class MyCallbackHandler implements CallbackHandler {
 	
 	private String username;
 	private String password;
+	private int authenticationType;
 	
 	public MyCallbackHandler(String username,String password)
 	{
 		System.out.println("Callback Handler - constructor called");
 		this.username=username;
 		this.password=password;
+		
+		
+	
+	}
+	
+	public void setAuthenticationType(int authenticationType)
+	{
+		this.authenticationType=authenticationType;
+		
+	}
+	
+	public int getAuthenticationType(){
+		
+		
+		return authenticationType;
 	}
 
 	@Override

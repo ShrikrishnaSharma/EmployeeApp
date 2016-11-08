@@ -29,7 +29,17 @@ Ext.define('EmployeeApp.view.LoginForm',{
     fieldLabel:'Password',
     id:'password',
     name:'Password',
+    inputType:'password',
     allowBlank:false
+    },
+    
+    
+    {
+    	xtype:'authenticationTypeComboBox',
+    	id:'authenticationType',
+    	name:'authenticationType',
+    	
+    	allowBlank:false
     }
     
     

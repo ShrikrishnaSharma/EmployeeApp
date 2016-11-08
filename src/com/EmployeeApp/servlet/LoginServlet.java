@@ -40,23 +40,42 @@ public class LoginServlet extends HttpServlet {
 		
 		 String username;
 		 String password;
+		 int authenticationType=0;
 		 
 		 System.setProperty("java.security.auth.login.config", "C:\\EmployeeApp2\\WebContent\\WEB-INF\\jass.config");
 		
 		username=request.getParameter("username");
 		password=request.getParameter("password");
 		
+		if(request.getParameter("authenticationType")!=null || request.getParameter("authenticationType")!="")
+		{
+			authenticationType=Integer.parseInt(request.getParameter("authenticationType"));
+		}
+		
 		System.out.println("username:"+username);
 		System.out.println("password:"+password);
+		System.out.println("authenticationType:"+authenticationType);
 		CallbackHandler handler = new MyCallbackHandler(username, password);
+		
 		PrintWriter pw=response.getWriter();
 		
 		LoginContext lc = null;
 	      try {
+	    	  
+	    	  if(authenticationType==1)
+	    	  {
 	          lc = new LoginContext("TestLogin",
 	                          handler);
 	          
 	        lc.login();
+	    	  }
+	    	  
+	    	  if(authenticationType==2)
+	    	  {
+	    		  lc=new LoginContext("TestLoginDB",handler);
+	    		  lc.login();
+	    		  
+	    	  }
 	          
 	         
 	         pw.println("{\"success\":true,");

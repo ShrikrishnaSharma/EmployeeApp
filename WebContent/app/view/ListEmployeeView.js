@@ -25,7 +25,11 @@ items: [
 	             xtype: 'typeComboBox', // default for Toolbars
 	             id:'type'
 	            
-	         },{
+	         },
+	         
+	         
+	         
+	         {
    	        	 xtype: 'button',
 	        	 text: 'ADD EMPLOYEE',
 	        		 align:'right',
@@ -173,7 +177,20 @@ items: [
 	        		 
 	        		 } );
 	         }
-	         }
+	         },
+
+	         {
+	        	 xtype:'button',
+	        	 text:'Logout',
+	        	
+	        	
+	        	 
+	        	 handler:function()
+	        	 {
+	        		 EmployeeApp.app.getController('EmployeeController').logout();
+	        	 }
+	         
+	         },
 	         
 	         
 	         
