@@ -76,6 +76,12 @@ public class LoginServlet extends HttpServlet {
 	    		  lc.login();
 	    		  
 	    	  }
+	    	  
+	    	  if(authenticationType==3)
+	    	  {
+	    		  lc=new LoginContext("TestLoginWebService",handler);
+	    		  lc.login();
+	    	  }
 	          
 	         
 	         pw.println("{\"success\":true,");

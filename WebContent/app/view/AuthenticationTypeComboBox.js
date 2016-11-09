@@ -2,7 +2,8 @@ var authenticationTypes = Ext.create('Ext.data.Store', {
     fields: ['typeId', 'typeName'],
     data : [
         {"typeId":1, "typeName":"Static"},
-        {"typeId":2, "typeName":"DB"}
+        {"typeId":2, "typeName":"DB"},
+        {"typeId":3, "typeName":"Web Service"}
        
         //...
     ]
