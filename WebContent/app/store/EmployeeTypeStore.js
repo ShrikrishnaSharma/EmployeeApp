@@ -13,9 +13,10 @@ Ext.define('EmployeeApp.store.EmployeeTypeStore',{
         // load using script tags for cross domain, if the data in on the same domain as
         // this page, an HttpProxy would be better
         type: 'jsonp',
-        url: 'http://localhost:8080/EmployeeApp2//ListEmployeeType',
+        url: 'http://10.104.15.90:8080/EmployeeApp2//ListEmployeeType',
         reader: {
-            root: 'employeeListTypes',
+            root: 'employeeListTypes'
+            
             
         }
 

@@ -1,6 +1,7 @@
 package com.EmployeeApp.dao;
 import com.EmployeeApp.model.Department;
 import com.EmployeeApp.model.EmployeeType;
+import com.EmployeeApp.dao.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

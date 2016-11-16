@@ -201,7 +201,7 @@ Ext.define('EmployeeApp.view.AddEmployeeForm', {
     
    
     
-    ],
+    ]
    /* buttons: [{
         text: 'Save',
         handler: function() {

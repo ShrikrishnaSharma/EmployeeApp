@@ -18,7 +18,7 @@ Ext.define('EmployeeApp.controller.EmployeeController',{
 Ext.Ajax.request({
 			
 			
-			url:'http://localhost:8080/EmployeeApp2/LogoutServlet',
+			url:'http://10.104.15.90:8080/EmployeeApp2/LogoutServlet',
 			method:'get',
 			
 				success:function(response) {
@@ -58,7 +58,7 @@ Ext.Ajax.request({
 		Ext.Ajax.request({
 			
 			
-			url:'http://localhost:8080/EmployeeApp2/LoginServlet',
+			url:'http://10.104.15.90:8080/EmployeeApp2/LoginServlet',
 			method:'post',
 			params:{
 				username:username,
@@ -93,7 +93,7 @@ Ext.Ajax.request({
 	{
 		console.log(empIds);
 		Ext.Ajax.request({
-       		url:'http://localhost:8080/EmployeeApp2/DeleteEmployee',
+       		url:'http://10.104.15.90:8080/EmployeeApp2/DeleteEmployee',
        		method:'post',
        		
        		params:{
@@ -158,7 +158,7 @@ Ext.Ajax.request({
        console.log(departmentList);
       
        	Ext.Ajax.request({
-       		url:'http://localhost:8080/EmployeeApp2/AddEmployee',
+       		url:'http://10.104.15.90:8080/EmployeeApp2/AddEmployee',
        		method:'post',
        		//jsonData: departmentList,
        		params:{
@@ -233,7 +233,7 @@ Ext.Ajax.request({
        employeeDataJsonObject=JSON.stringify(employeeDataObject);
        console.log(employeeDataJsonObject);
        	Ext.Ajax.request({
-       		url:'http://localhost:8080/EmployeeApp2/UpdateEmployee',
+       		url:'http://10.104.15.90:8080/EmployeeApp2/UpdateEmployee',
        		method:'post',
        		headers: {
        	        'employeeDataJsonObject': employeeDataJsonObject
@@ -315,7 +315,7 @@ Ext.Ajax.request({
        console.log(departmentList);
       
        	Ext.Ajax.request({
-       		url:'http://localhost:8080/EmployeeApp2/UpdateEmployee',
+       		url:'http://10.104.15.90:8080/EmployeeApp2/UpdateEmployee',
        		method:'post',
        		//jsonData: departmentList,
        		params:{

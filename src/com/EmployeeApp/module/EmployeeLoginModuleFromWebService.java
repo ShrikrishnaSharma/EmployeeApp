@@ -12,9 +12,22 @@ import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import org.glassfish.jersey.client.ClientConfig;
+
+import com.EmployeeApp.util.NotificationObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.xml.internal.ws.api.policy.PolicyResolver.ClientContext;
 import com.tm.service.AuthenticateUser;
 import com.tm.service.AuthenticateUserImpl;
 
@@ -75,18 +88,44 @@ public class EmployeeLoginModuleFromWebService implements LoginModule {
         
         try
         {
-        URL url = new URL("http://localhost:9999/ws/authenticateUser?wsdl");  
-        QName qname = new QName("http://service.tm.com/", "AuthenticateUserImplService");
-        System.out.println(qname);
-        System.out.println("-------------");
-        
-        Service service = Service.create(url, qname);  
-        System.out.println("----------"+service);
-        QName qPortName=new QName("http://service.tm.com/", "AuthenticateUserImplPort");
-        AuthenticateUser authenticateUser=service.getPort(qPortName,AuthenticateUser.class);
-        
-        System.out.println(authenticateUser);
-        succeeded=authenticateUser.authenticateUser(username, password);
+        	
+        	System.out.println("//////////////////---------------------\\\\\\\\\\\\\\\\\\");
+       
+      Client client=ClientBuilder.newClient();
+      
+      WebTarget target=client.target("http://localhost:8080/UserWebServiceApi/rest");
+      
+      WebTarget resourceWebTarget=target.path("authenticateUser");
+      WebTarget resourceWebTargetWithQueryParam=resourceWebTarget.queryParam("username",username).queryParam("password", password);
+      
+      Invocation.Builder invocationBuilder=resourceWebTargetWithQueryParam.request();
+      
+      Response response=invocationBuilder.get();
+      
+      
+      
+      
+      
+      if(response.getStatus()==200)
+      {
+      
+   /* Gson gson=new Gson();
+    
+    NotificationObject notificationObject=gson.fromJson(response.readEntity(String.class),NotificationObject.class);
+    
+    if(notificationObject.getSuccess()==true)*/succeeded=true;
+    
+    
+      }
+      if(response.getStatus()==401)succeeded=false;
+    
+    
+    
+      
+     
+      
+      
+       
         
         }catch(Exception e)
         {

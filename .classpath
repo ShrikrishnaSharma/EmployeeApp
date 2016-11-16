@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jersey-jax-rs"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Axis"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AuthenticateUserService"/>
-	<classpathentry kind="lib" path="/AuthenticateUserService/build"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/AuthenticateUserService"/>
+	<classpathentry exported="true" kind="lib" path="/AuthenticateUserService/build"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

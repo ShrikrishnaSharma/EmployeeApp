@@ -2,6 +2,7 @@ package com.EmployeeApp.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.EmployeeApp.handler.MyCallbackHandler;
 
 /**
@@ -21,6 +24,11 @@ import com.EmployeeApp.handler.MyCallbackHandler;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	static Logger log = Logger.getLogger(LoginServlet.class.getName());
+	
+	
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +43,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		log.info(new Date()+" in login servlet info " +LoginServlet.class);
+		
+		
+		log.debug("in login servlet");
+		log.warn("in login servlet warn");
+		log.error(new Date()+" in login servlet error");
 		boolean status=false;
 		
 		
@@ -52,9 +66,7 @@ public class LoginServlet extends HttpServlet {
 			authenticationType=Integer.parseInt(request.getParameter("authenticationType"));
 		}
 		
-		System.out.println("username:"+username);
-		System.out.println("password:"+password);
-		System.out.println("authenticationType:"+authenticationType);
+		
 		CallbackHandler handler = new MyCallbackHandler(username, password);
 		
 		PrintWriter pw=response.getWriter();
@@ -79,6 +91,8 @@ public class LoginServlet extends HttpServlet {
 	    	  
 	    	  if(authenticationType==3)
 	    	  {
+	    		  
+	    		  System.out.println("in web service login module");
 	    		  lc=new LoginContext("TestLoginWebService",handler);
 	    		  lc.login();
 	    	  }

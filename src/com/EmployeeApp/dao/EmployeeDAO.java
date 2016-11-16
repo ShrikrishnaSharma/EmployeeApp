@@ -13,6 +13,7 @@ import com.EmployeeApp.model.Employee;
 import com.EmployeeApp.model.EmployeeJson;
 import com.EmployeeApp.model.EmployeeType;
 import com.EmployeeApp.model.EmployeeVO;
+import com.EmployeeApp.dao.DBUtils;
 
 public class EmployeeDAO {
 	
